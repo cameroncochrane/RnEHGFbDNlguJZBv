@@ -86,3 +86,9 @@ def rank_by_starred(df: pd.DataFrame, candidate_id: int, top_n: int | None = Non
     # Exclude the starred candidate from results
     pool = df[df["id"] != candidate_id].copy()
     return rank_candidates(pool, query, top_n=top_n)
+
+def rank_by_description(df: pd.DataFrame, description: str, top_n: int | None = None) -> pd.DataFrame:
+    """
+    Use a starred candidate's 'combined' as the query.
+    """
+    return rank_candidates(df, description, top_n)

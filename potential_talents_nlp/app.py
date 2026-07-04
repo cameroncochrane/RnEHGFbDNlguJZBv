@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 
 # Custom Imports:
-from recommender import load_data, rank_by_starred
+from recommender import load_data, rank_by_starred,rank_by_description
 
 # Import the base 'database' (csv) as a df:
 from config import RAW_DATA_DIR
@@ -20,6 +20,19 @@ df, mod_df = load_data(BASE_DATA_PATH)
 # Add them to the session memory:
 st.session_state.df = df
 st.session_state.mod_df = mod_df
+
+# Initialise other session_state variables
+if "starred_id" not in st.session_state:
+    st.session_state.starred_id = None
+
+if "ranked_df" not in st.session_state:
+    st.session_state.ranked_df = None
+
+if "active_mode" not in st.session_state:
+    st.session_state.active_mode = None   # "star" | "description"
+
+if "active_query" not in st.session_state:
+    st.session_state.active_query = ""
 
 # Main layout:
 st.title("Talent Recommender")
@@ -86,9 +99,36 @@ with tab_search:
                     df[df["id"] == cid].iloc[0]["job_title"]
                 )
 
-    # Describe an ideal candidate
-    
+    # Describe an ideal candidate:
+    with col_right:
+        st.subheader("Describe your ideal candidate")
 
+        description = st.text_area(
+            "Role description",
+            placeholder=("e.g. a graduate with an interest in HR"),
+            height=130,
+            key="desc_input"
+            )
+        
+        top_n_desc = st.slider("Show top N results", 5, 50, 20, key="top_n_desc")
+
+        if st.button("Find matching candidates", use_container_width=True, key="btn_desc"):
+            if not description.strip():
+                st.warning("Please enter a description first.")
+            else:
+                with st.spinner("Analysing description and ranking candidates…"):
+                    ranked = rank_by_description(
+                        df,
+                        description.strip(),
+                        top_n=top_n_desc,
+                    )
+                
+                st.session_state.ranked_df = ranked
+                st.session_state.starred_id = None
+                st.session_state.active_mode = "description"
+                st.session_state.active_query = description.strip()
+
+    st.divider()
     
     # Results:
     if st.session_state.ranked_df is not None:
@@ -108,10 +148,12 @@ with tab_search:
             st.dataframe(display_ranked_df)
 
             # Score distribution chart
-            with st.expander("📊 Score distribution", expanded=False):
+            with st.expander("Score distribution", expanded=False):
                 chart_data = ranked[["similarity_score"]].copy()
                 chart_data.index = [f"#{r['id']}" for _, r in ranked.iterrows()]
                 st.bar_chart(chart_data)
+        
+        
            
 
 
