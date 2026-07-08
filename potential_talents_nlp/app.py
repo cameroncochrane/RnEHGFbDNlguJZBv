@@ -2,7 +2,7 @@
 
 # CCDS Imports:
 from pathlib import Path
-from potential_talents_nlp.config import PROCESSED_DATA_DIR, RAW_DATA_DIR
+from config import PROCESSED_DATA_DIR, RAW_DATA_DIR
 
 # Base Imports:
 import streamlit as st
