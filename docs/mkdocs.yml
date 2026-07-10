@@ -1,4 +1,8 @@
 site_name: RnEHGFbDNlguJZBv
-# 
 site_author: Cameron Cochrane
-# 
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Usage: usage.md
+  - How It Works: how-it-works.md
