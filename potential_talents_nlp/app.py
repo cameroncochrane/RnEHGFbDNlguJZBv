@@ -17,6 +17,14 @@ from config import RAW_DATA_DIR
 BASE_DATA_PATH = RAW_DATA_DIR / "potential-talents - Aspiring human resources - seeking human resources.csv"
 df, mod_df = load_data(BASE_DATA_PATH)
 
+# Define base layout:
+st.set_page_config(
+    page_title="Talent Recommender",
+    layout="wide", # Makes the app much wider
+    initial_sidebar_state="expanded"
+
+)
+
 # Add them to the session memory:
 st.session_state.df = df
 st.session_state.mod_df = mod_df
