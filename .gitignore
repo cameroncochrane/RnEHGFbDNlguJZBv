@@ -1,8 +1,9 @@
-# Data
-/data/
-
 # Mac OS-specific storage files
 .DS_Store
+
+# Claude data:
+.claude/
+
 
 # vim
 *.swp

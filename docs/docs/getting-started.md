@@ -25,11 +25,13 @@ make requirements
 `make requirements` installs everything listed in `requirements.txt` (`loguru`, `mkdocs`, `python-dotenv`, `ruff`, `tqdm`, `typer`) and installs `potential_talents_nlp` itself in editable mode (`pip install -e .`).
 
 !!! note "A few extra packages aren't in requirements.txt yet"
-    The Streamlit app and the recommender logic also depend on `streamlit`, `pandas`, `numpy`, and `scikit-learn`, and the notebook additionally uses `sentence-transformers` for its model comparison. Install these too:
+    The Streamlit app and the recommender logic also depend on `streamlit`, `pandas`, `numpy`, `scikit-learn`, `transformers`, and `torch` (for the `bert-base-uncased` model). Install these too:
 
     ```bash
-    pip install streamlit pandas numpy scikit-learn sentence-transformers
+    pip install streamlit pandas numpy scikit-learn transformers torch
     ```
+
+    The exploratory notebooks additionally use `gensim` and `sentence-transformers` to compare BERT against other embedding approaches — see [How It Works](how-it-works.md).
 
 ## 3. Data
 
@@ -56,15 +58,15 @@ streamlit run app.py
 
 This opens the Talent Recommender in your browser at `http://localhost:8501`. See [Usage](usage.md) for how to use it.
 
-## 6. Explore the notebook
+## 6. Explore the notebooks
 
-The exploratory work — including the comparison between TF-IDF and SentenceTransformers — lives in:
+The exploratory work lives in `notebooks/`:
 
-```
-notebooks/PotentialTalents_1.ipynb
-```
+- `PotentialTalents_1.ipynb` — TF-IDF vs SentenceTransformers comparison.
+- `PotentialTalents_2.ipynb` — Bag-of-Words, Word2Vec, GloVe, FastText, and BERT comparison.
+- `PotentialTalents_3.ipynb` — SBERT + CrossEncoder rerank, and a final BERT vs TF-IDF comparison on `job_title` vs the combined text — the reasoning behind the production BERT/`job_title` approach.
 
-Open it with Jupyter (`jupyter lab` or `jupyter notebook`) once your environment is active.
+Open them with Jupyter (`jupyter lab` or `jupyter notebook`) once your environment is active.
 
 ## 7. Linting and formatting
 

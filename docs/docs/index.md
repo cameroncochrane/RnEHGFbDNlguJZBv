@@ -10,15 +10,15 @@ Recruiters can:
 - **Star an existing candidate** and instantly see who else in the pool looks most similar to them.
 - **Type a description of the ideal hire** (e.g. *"an experienced HR professional in New York"*) and get a ranked shortlist.
 
-Under the hood, candidate text (job title, location, connection count) is vectorized with TF-IDF and compared using cosine similarity. See [How It Works](how-it-works.md) for the details, and [Usage](usage.md) for a guided tour of the app itself.
+Under the hood, each candidate's job title is embedded with a **BERT** (`bert-base-uncased`) transformer model and compared using cosine similarity. See [How It Works](how-it-works.md) for the details, and [Usage](usage.md) for a guided tour of the app itself.
 
 ## Where to go next
 
 | Page | What's in it |
 |---|---|
-| [Getting Started](getting-started.md) | Environment setup, installing dependencies, running the app and the notebook |
+| [Getting Started](getting-started.md) | Environment setup, installing dependencies, running the app and the notebooks |
 | [Usage](usage.md) | Walkthrough of the Streamlit UI — browsing, starring, and description search |
-| [How It Works](how-it-works.md) | The TF-IDF + cosine similarity pipeline, and the TF-IDF vs SentenceTransformers comparison from the notebook |
+| [How It Works](how-it-works.md) | The BERT + cosine similarity pipeline, and the comparison against TF-IDF, Bag-of-Words, Word2Vec, GloVe, FastText, and SentenceTransformers from the notebooks |
 
 ## Commands
 

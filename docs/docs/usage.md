@@ -24,7 +24,7 @@ This tab has two independent ways to rank candidates, side by side.
 2. Adjust **Show top N results** (5–50) to control how many ranked results come back.
 3. Click **⭐ Rank by this candidate**.
 
-The app builds a query from the starred candidate's combined text (job title + location + connections) and ranks every *other* candidate in the pool by cosine similarity to it — i.e. "find people like this person." The starred candidate itself is excluded from the results.
+The app builds a query from the starred candidate's `job_title`, embeds it with BERT, and ranks every *other* candidate in the pool by cosine similarity to it — i.e. "find people like this person." The starred candidate itself is excluded from the results.
 
 ### Option B — Describe your ideal candidate
 
@@ -32,7 +32,7 @@ The app builds a query from the starred candidate's combined text (job title + l
 2. Adjust **Show top N results** (5–50).
 3. Click **Find matching candidates**.
 
-The description is vectorized the same way as candidate text and used directly as the similarity query — no need to pick an existing candidate first.
+The description is embedded with BERT the same way as candidate job titles and used directly as the similarity query — no need to pick an existing candidate first.
 
 ### Reading the results
 
