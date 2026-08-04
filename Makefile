@@ -2,7 +2,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = RnEHGFbDNlguJZBv
+PROJECT_NAME = HR-Talent
 PYTHON_VERSION = 3.12
 PYTHON_INTERPRETER = python
 
